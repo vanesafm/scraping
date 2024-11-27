@@ -35,5 +35,5 @@ jobs:
       - name: Subir archivo CSV al repositorio
         uses: actions/upload-artifact@v3
         with:
-          name: vestidos_productos.csv
+          name: productos-csv
           path: '*.csv'  # Esto subirá cualquier archivo CSV generado por el script
