@@ -1,0 +1,39 @@
+name: Ejecutar script de scraping
+
+on:
+  push:
+    branches:
+      - prod  # Ejecutar cuando haya un push a la rama 'prod'
+
+jobs:
+  scraping:
+    runs-on: ubuntu-latest  # Usamos Ubuntu como sistema operativo
+
+    steps:
+      # Paso 1: Comprobar el código del repositorio
+      - name: Comprobar repositorio
+        uses: actions/checkout@v3
+
+      # Paso 2: Configurar Python
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'  # O cualquier otra versión de Python que necesites
+
+      # Paso 3: Instalar dependencias
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # Instala las dependencias desde requirements.txt
+
+      # Paso 4: Ejecutar el script de scraping
+      - name: Ejecutar script de scraping
+        run: |
+          python scrapper.py  # Ejecuta el script 'scrapper.py'
+
+      # Paso 5: Subir archivos generados (si es necesario)
+      - name: Subir archivo CSV al repositorio
+        uses: actions/upload-artifact@v3
+        with:
+          name: productos-csv
+          path: '*.csv'  # Esto subirá cualquier archivo CSV generado por el script
