@@ -3,7 +3,7 @@ name: Ejecutar script de scraping
 on:
   push:
     branches:
-      - prod  # Ejecutar cuando haya un push a la rama 'prod'
+      - main  # Ejecutar cuando haya un push a la rama 'prod'
 
 jobs:
   scraping:
